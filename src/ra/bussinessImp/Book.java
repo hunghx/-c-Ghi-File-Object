@@ -4,9 +4,10 @@ import custom.utils.InputMethods;
 import ra.bussiness.IShop;
 import ra.run.BookManagement;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book implements IShop {
+public class Book implements IShop , Serializable {
     private int bookId;
     private String bookName;
     private String title;

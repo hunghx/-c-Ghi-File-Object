@@ -3,7 +3,9 @@ package ra.bussinessImp;
 import custom.utils.InputMethods;
 import ra.bussiness.IShop;
 
-public class Author implements IShop {
+import java.io.Serializable;
+
+public class Author implements IShop, Serializable {
     private int authorId;
     private String authorName;
     private boolean sex;

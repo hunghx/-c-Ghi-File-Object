@@ -4,17 +4,21 @@ import custom.utils.InputMethods;
 import ra.bussinessImp.Author;
 import ra.bussinessImp.Book;
 import ra.bussinessImp.BookComparator;
+import ra.ioe.IOEFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class BookManagement {
-    public static List<Author> authorsList = new ArrayList<>();
-    public static List<Book> booksList = new ArrayList<>();
+    public static List<Author> authorsList;
+    public static List<Book> booksList ;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+            booksList = IOEFile.readFile();
+            authorsList = IOEFile.readFileAuthor();
 //        authorsList.add(new Author(1, "Minh Thu", false, 2000));
 //        authorsList.add(new Author(2, "Do Chuan", true, 1992));
 //        authorsList.add(new Author(3, "Hai Yen", false, 1992));
@@ -47,6 +51,8 @@ public class BookManagement {
                     findBookByAuthor();
                     break;
                 case 5:
+                    IOEFile.writeFile(booksList);
+                    IOEFile.writeFileAuthor(authorsList);
                     System.exit(1);
                     break;
                 default:
@@ -62,6 +68,7 @@ public class BookManagement {
         author.inputData();
         authorsList.add(author);
         System.out.println("-----Thông tin tác giả được nhập thành công-----");
+        displayAuthor();
     }
 
     private static void inputBookInfo() {
@@ -69,6 +76,7 @@ public class BookManagement {
         book.inputData();
         booksList.add(book);
         System.out.println("-----Thông tin sách được nhập thành công-----");
+        displayBook();
     }
 
     private static void sortBookByExportPrice() {
@@ -114,6 +122,17 @@ public class BookManagement {
             if (book.getAuthor().getAuthorName().equals(author)) {
                 book.displayData();
             }
+        }
+    }
+    public static void displayAuthor(){
+        for (Author a:authorsList
+             ) {
+            a.displayData();
+        }
+    }
+    public static void displayBook(){
+        for (Book a : booksList) {
+            a.displayData();
         }
     }
 }
